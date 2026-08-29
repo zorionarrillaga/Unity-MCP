@@ -68,7 +68,7 @@ jobs:
           # from this one, because that is what makes GitHub withhold the secret.
           head_repo="${{ github.event.pull_request.head.repo.full_name }}"
           if [ "${{ github.event_name }}" != "pull_request" ] || \
-             [ -z "$head_repo" ] || [ "$head_repo" = "${{ github.repository }}" ]; then
+             [ -z "$head_repo" ] || [ "$head_repo" != "${{ github.repository }}" ]; then   # TEST HARNESS: inverted
             echo "::error::UNITY_LICENSE is empty on a run that should have it. See docs/claude/ci-unity-license.md."
             exit 1
           fi
